@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Profile</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial;
+        }
+
+        body{
+            background:#f0f2f5;
+        }
+
+        .navbar{
+            background:white;
+            padding:15px 40px;
+            display:flex;
+            justify-content:space-between;
+            box-shadow:0px 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .navbar a{
+            text-decoration:none;
+            color:#1877f2;
+            font-weight:bold;
+            margin-left:20px;
+        }
+
+        .container{
+            width:600px;
+            margin:30px auto;
+        }
+
+        .profile-card{
+            background:white;
+            padding:30px;
+            border-radius:15px;
+            box-shadow:0px 2px 5px rgba(0,0,0,0.1);
+            text-align:center;
+            margin-bottom:25px;
+        }
+
+        .avatar{
+            width:90px;
+            height:90px;
+            border-radius:50%;
+            background:#1877f2;
+            color:white;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            margin:auto;
+            font-size:35px;
+            font-weight:bold;
+            margin-bottom:15px;
+        }
+
+        .stats{
+            display:flex;
+            justify-content:center;
+            gap:40px;
+            margin-top:20px;
+        }
+
+        .stat h3{
+            color:#1877f2;
+        }
+
+        button{
+            margin-top:20px;
+            padding:12px 25px;
+            border:none;
+            background:#1877f2;
+            color:white;
+            border-radius:10px;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+        }
+
+        button:hover{
+            background:#166fe5;
+        }
+
+        .post{
+            background:white;
+            padding:20px;
+            border-radius:15px;
+            margin-bottom:20px;
+            box-shadow:0px 2px 5px rgba(0,0,0,0.1);
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+    <div class="navbar">
+
+        <h2>SocialApp</h2>
+
+        <div>
+
+            <a href="/">
+                Home
+            </a>
+
+            <a href="/logout/">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="container">
+
+        <div class="profile-card">
+
+            <div class="avatar">
+                {{ profile_user.username|first|upper }}
+            </div>
+
+            <h1>{{ profile_user.username }}</h1>
+
+            <div class="stats">
+
+                <div class="stat">
+                    <h3>{{ posts.count }}</h3>
+                    <p>Posts</p>
+                </div>
+
+                <div class="stat">
+                    <h3>{{ followers_count }}</h3>
+                    <p>Followers</p>
+                </div>
+
+                <div class="stat">
+                    <h3>{{ following_count }}</h3>
+                    <p>Following</p>
+                </div>
+
+            </div>
+
+            {% if user.is_authenticated and user != profile_user %}
+
+                {% if not already_following %}
+
+                    <a href="/follow/{{ profile_user.id }}/">
+
+                        <button>
+                            Follow
+                        </button>
+
+                    </a>
+
+                {% else %}
+
+                    <button>
+                        Following
+                    </button>
+
+                {% endif %}
+
+            {% endif %}
+
+        </div>
+
+        {% for post in posts %}
+
+            <div class="post">
+
+                <p>{{ post.content }}</p>
+
+            </div>
+
+        {% endfor %}
+
+    </div>
+
+</body>
+
+</html>
