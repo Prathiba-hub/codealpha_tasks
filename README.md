@@ -9,9 +9,9 @@ This repository contains the projects completed as part of the CodeAlpha Interns
 ```text
 codealpha_tasks/
 │
-├── task1_ecommerce_store/
+├── Task1_ecommerce/
 │
-├── task2_social_media_app/
+├── Task2_socialmedia/
 │
 └── README.md
 ```
